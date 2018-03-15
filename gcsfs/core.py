@@ -1330,6 +1330,9 @@ class GCSFile:
                                    end + self.blocksize)
                 self.end = end + self.blocksize
                 self.cache = self.cache + new
+        if self.end - self.start != len(self.cache):
+            warnings.warn('Start, end and cache do not tally (_fetch method). '
+                          'Fetching data may go wrong.')
 
     def read(self, length=-1):
         """
